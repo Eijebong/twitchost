@@ -1,5 +1,6 @@
 <html>
     <head>
+    <title>Twitch stream hosting</title>
     <script src= "https://player.twitch.tv/js/embed/v1.js"></script>
 <style>
     * {
@@ -56,8 +57,6 @@
                 var channel = params.get('channel')
                 var chat = params.get('chat')
 
-                console.log(channel);
-
                 if (channel === null || chat === null) {
                     var link = window.location.origin + window.location.pathname + "?channel=360chrism&chat=360chrism";
                     document.getElementById("main").innerHTML = "You need to provide a channel and a chat, e.g&nbsp;<a href=\"" + link + "\">" + link + "</a>";
@@ -68,7 +67,8 @@
                                     channel: channel,
                                 };
                     var player = new Twitch.Player("player", options);
-                    document.getElementById("chat").src = "https://www.twitch.tv/embed/" + chat + "/chat?parent=" + window.location.host + "&darkpopout"
+                    document.getElementById("chat").src = "https://www.twitch.tv/embed/" + chat + "/chat?parent=" + window.location.host + "&darkpopout";
+                    document.title += " " + channel + " (video) / " + chat + " (chat)";
                 }
             </script>
 
