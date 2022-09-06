@@ -59,8 +59,8 @@
                 console.log(channel);
 
                 if (channel === null || chat === null) {
-                    var link = window.location.origin + "?channel=360chrism&chat=360chrism";
-                    document.getElementById("main").innerHTML = "You need to provide a channel and a chat, e.g <a href=\"" + link + "\">" + link + "</a>";
+                    var link = window.location.origin + window.location.pathname + "?channel=360chrism&chat=360chrism";
+                    document.getElementById("main").innerHTML = "You need to provide a channel and a chat, e.g&nbsp;<a href=\"" + link + "\">" + link + "</a>";
                 } else {
                     var options = {
                                     width: "100%",
