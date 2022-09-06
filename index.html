@@ -1,0 +1,71 @@
+<html>
+    <head>
+<style>
+    * {
+        margin: 0;
+    }
+    body {
+        background-color: #000;
+    }
+    main {
+        display: flex;
+        flex-flow: row;
+        height: 100%;
+    }
+
+    #player {
+        margin: auto;
+        height: 100%;
+        flex: 1 80%;
+    }
+
+    #chat {
+        margin: auto;
+        height: 100%;
+        flex: 1 20%;
+   }
+
+    @media screen and (max-width: 800px) {
+        main {
+            flex-flow: column;
+            width: 100%;
+        }
+
+        #player {
+            flex: 1 50%;
+            width: 100%;
+        }
+
+        #chat {
+            flex: 1 50%;
+            width: 100%;
+        }
+    }
+
+</style>
+    </head>
+    <body>
+        <main>
+            <div id="player"></div>
+            <script src= "https://player.twitch.tv/js/embed/v1.js"></script>
+            <script type="text/javascript">
+                var options = {
+                                width: "100%",
+                                height: "100%",
+                                channel: "shenanagans_",
+                                //video: "<video ID>",
+                                //collection: "<collection ID>",
+                                // only needed if your site is also embedded on embed.example.com and othersite.example.com
+                                parent: ["<TODO>"]
+                            };
+                var player = new Twitch.Player("player", options);
+            </script>
+
+            <iframe id="chat" src="https://www.twitch.tv/embed/360chrism/chat?parent=<TODO>&darkpopout"/>
+        </main>
+
+
+
+
+    </body>
+</html>
