@@ -12,6 +12,7 @@
         display: flex;
         flex-flow: row;
         height: 100%;
+        color: white;
     }
 
     #player {
@@ -46,7 +47,7 @@
 </style>
     </head>
     <body>
-        <main>
+        <main id="main">
             <div id="player"></div>
             <iframe id="chat"></iframe>
             <script>
@@ -54,13 +55,20 @@
                 var channel = params.get('channel')
                 var chat = params.get('chat')
 
-                var options = {
-                                width: "100%",
-                                height: "100%",
-                                channel: channel,
-                            };
-                var player = new Twitch.Player("player", options);
-                document.getElementById("chat").src = "https://www.twitch.tv/embed/" + chat + "/chat?parent=" + window.location.host + "&darkpopout"
+                console.log(channel);
+
+                if (channel === null || chat === null) {
+                    var link = window.location.origin + "?channel=360chrism&chat=360chrism";
+                    document.getElementById("main").innerHTML = "You need to provide a channel and a chat, e.g <a href=\"" + link + "\">" + link + "</a>";
+                } else {
+                    var options = {
+                                    width: "100%",
+                                    height: "100%",
+                                    channel: channel,
+                                };
+                    var player = new Twitch.Player("player", options);
+                    document.getElementById("chat").src = "https://www.twitch.tv/embed/" + chat + "/chat?parent=" + window.location.host + "&darkpopout"
+                }
             </script>
 
         </main>
