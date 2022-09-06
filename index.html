@@ -1,5 +1,6 @@
 <html>
     <head>
+    <script src= "https://player.twitch.tv/js/embed/v1.js"></script>
 <style>
     * {
         margin: 0;
@@ -47,21 +48,21 @@
     <body>
         <main>
             <div id="player"></div>
-            <script src= "https://player.twitch.tv/js/embed/v1.js"></script>
-            <script type="text/javascript">
+            <iframe id="chat"></iframe>
+            <script>
+                let params = new URLSearchParams(window.location.search);
+                var channel = params.get('channel')
+                var chat = params.get('chat')
+
                 var options = {
                                 width: "100%",
                                 height: "100%",
-                                channel: "shenanagans_",
-                                //video: "<video ID>",
-                                //collection: "<collection ID>",
-                                // only needed if your site is also embedded on embed.example.com and othersite.example.com
-                                parent: ["eijebong.github.io"]
+                                channel: channel,
                             };
                 var player = new Twitch.Player("player", options);
+                document.getElementById("chat").src = "https://www.twitch.tv/embed/" + chat + "/chat?parent=" + window.location.host + "&darkpopout"
             </script>
 
-            <iframe id="chat" src="https://www.twitch.tv/embed/360chrism/chat?parent=eijebong.github.io&darkpopout"/>
         </main>
 
 
