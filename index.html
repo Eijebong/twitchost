@@ -22,12 +22,19 @@
         flex: 1 80%;
     }
 
-    #chat {
+    #chats {
         margin: auto;
         height: 100%;
+        display: flex;
+        flex-direction: column;
         flex: 1 20%;
+    }
+
+    #chat {
         border: none;
-   }
+        width: 100%;
+        flex-grow: 1;
+    }
 
     @media screen and (max-width: 1000px) {
         main {
@@ -40,8 +47,9 @@
             width: 100%;
         }
 
-        #chat {
+        #chats {
             flex: 1 50%;
+            flex-direction: row;
             width: 100%;
         }
     }
@@ -51,13 +59,20 @@
     <body>
         <main id="main">
             <div id="player"></div>
-            <iframe id="chat"></iframe>
+            <div id="chats"></div>
             <script>
                 let params = new URLSearchParams(window.location.search);
                 var channel = params.get('channel')
-                var chat = params.get('chat')
+                var chats = params.getAll('chat')
 
-                if (channel === null || chat === null) {
+                function addIframe(el, src) {
+                    var iframe = document.createElement("iframe");
+                    iframe.setAttribute("id", "chat");
+                    iframe.setAttribute("src", src);
+                    el.appendChild(iframe);
+                }
+
+                if (channel === null || chats === []) {
                     var link = window.location.origin + window.location.pathname + "?channel=360chrism&chat=360chrism";
                     document.getElementById("main").innerHTML = "You need to provide a channel and a chat, e.g&nbsp;<a href=\"" + link + "\">" + link + "</a>";
                 } else {
@@ -67,8 +82,13 @@
                                     channel: channel,
                                 };
                     var player = new Twitch.Player("player", options);
-                    document.getElementById("chat").src = "https://www.twitch.tv/embed/" + chat + "/chat?parent=" + window.location.host + "&darkpopout";
-                    document.title += " " + channel + " (video) / " + chat + " (chat)";
+                    var chatsEl = document.getElementById("chats");
+
+                    for (var chat of chats) {
+                        const src = "https://www.twitch.tv/embed/" + chat + "/chat?parent=" + window.location.host + "&darkpopout";
+                        addIframe(chatsEl, src);
+                    }
+                    document.title += " " + channel + " (video) / " + chats + " (chat)";
                 }
             </script>
 
