@@ -36,6 +36,24 @@
         flex-grow: 1;
     }
 
+    @media screen and (max-height: 800px) {
+        main {
+            flex-flow: row;
+            width: 100%;
+        }
+
+        #player {
+            flex: 1 70%;
+            width: 100%;
+        }
+
+        #chats {
+            flex: 1 50%;
+            flex-direction: row;
+            width: 100%;
+        }
+    }
+
     @media screen and (max-width: 1000px) {
         main {
             flex-flow: column;
