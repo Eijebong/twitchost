@@ -36,6 +36,10 @@
         flex-grow: 1;
     }
 
+    .reversechat {
+        flex-flow: row-reverse !important;
+    }
+
     @media screen and (max-height: 800px) {
         main {
             flex-flow: row;
@@ -60,6 +64,10 @@
             width: 100%;
         }
 
+        .reversechat {
+            flex-flow: column-reverse !important;
+        }
+
         #player {
             flex: 1 50%;
             width: 100%;
@@ -81,6 +89,7 @@
             <script>
                 let params = new URLSearchParams(window.location.search);
                 var channel = params.get('channel')
+                var reversechat = params.get('reversechat')
                 var chats = params.getAll('chat')
 
                 function addIframe(el, src) {
@@ -88,6 +97,10 @@
                     iframe.setAttribute("id", "chat");
                     iframe.setAttribute("src", src);
                     el.appendChild(iframe);
+                }
+
+                if (reversechat) {
+                    document.getElementById("main").classList.add("reversechat");
                 }
 
                 if (channel === null || chats === []) {
